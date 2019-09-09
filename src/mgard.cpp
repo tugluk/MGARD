@@ -69,9 +69,9 @@ refactor_qz (int nrow, int ncol, int nfib, const double *u, int &outsize, double
 
   //  double norm =  mgard_gen::ml2_norm3(0,  nrow,  ncol,  nfib ,  nrow,  ncol,  nfib,   v, coords_x, coords_y, coords_z);
 
-  //  double norm = mgard_common::max_norm(v);
+  double norm = mgard_common::max_norm(v);
 
-  double norm = 1.0; // absolute s-norm, need a switch for relative errors
+  //  double norm = 1.0; // absolute s-norm, need a switch for relative errors
   tol /= nlevel + 1 ;
   //  double s = 0; // Defaulting to L8' compression for a start. 
 
