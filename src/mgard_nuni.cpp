@@ -451,7 +451,7 @@ void qwrite_3D_interleave( const int nrow, const int ncol, const int nfib, const
 }
 
 
-namespace mgard_cannon
+namespace mgard_canon
 {
 
   void assign_num_level(const int nrow, const int ncol,    const int  l, double* v, double num)
@@ -1286,7 +1286,7 @@ namespace mgard_gen
             row_vec[jcol] = v[mgard_common::get_index(ncol, ir, jcol)];
           }
 
-        //        mgard_cannon::pi_lminus1(l, row_vec, coords_x);
+        //        mgard_canon::pi_lminus1(l, row_vec, coords_x);
         pi_lminus1_l(l, row_vec, coords_x, nc,  ncol);
         for (int jcol = 0; jcol < ncol; ++jcol)
           {
@@ -2092,7 +2092,7 @@ void sub3_level(const int  l, double* v, double* work, int nrow, int ncol, int n
     
     pi_Ql_first(nr, nc, nrow, ncol, l, v, coords_x, coords_y, row_vec, col_vec); //(I-\Pi u) this is the initial move to 2^k+1 nodes
 
-    mgard_cannon::copy_level(nrow, ncol, l, v,  work);
+    mgard_canon::copy_level(nrow, ncol, l, v,  work);
     mgard_gen::assign_num_level_l(0, work.data(), 0.0, nr, nc, nrow, ncol);
 
     // row-sweep
@@ -2103,7 +2103,7 @@ void sub3_level(const int  l, double* v, double* work, int nrow, int ncol, int n
             row_vec[jcol] = work[mgard_common::get_index(ncol, irow, jcol)];
           }
         
-        mgard_cannon::mass_matrix_multiply(0, row_vec, coords_x);
+        mgard_canon::mass_matrix_multiply(0, row_vec, coords_x);
         
         restriction_first(row_vec, coords_x, nc, ncol);
         
@@ -2144,7 +2144,7 @@ void sub3_level(const int  l, double* v, double* work, int nrow, int ncol, int n
                 col_vec[irow] = work[mgard_common::get_index(ncol,irow, jcol)] ;
               }
             
-            mgard_cannon::mass_matrix_multiply(0, col_vec, coords_y);
+            mgard_canon::mass_matrix_multiply(0, col_vec, coords_y);
             
             restriction_first(col_vec, coords_y, nr, nrow);
 
@@ -2533,7 +2533,7 @@ void prolongate_l(const int  l, std::vector<double>& v,  std::vector<double>& co
             row_vec[jcol] = work[mgard_common::get_index(ncol, irow, jcol)];
           }
         
-        mgard_cannon::mass_matrix_multiply(0, row_vec, coords_x);
+        mgard_canon::mass_matrix_multiply(0, row_vec, coords_x);
         
         restriction_first(row_vec, coords_x, nc, ncol);
         
@@ -2575,7 +2575,7 @@ void prolongate_l(const int  l, std::vector<double>& v,  std::vector<double>& co
                   }
 
                 
-                mgard_cannon::mass_matrix_multiply(0, col_vec, coords_y);
+                mgard_canon::mass_matrix_multiply(0, col_vec, coords_y);
                 
                 mgard_gen::restriction_first(col_vec, coords_y, nr, nrow);
 
@@ -2805,7 +2805,7 @@ void compute_zl_last(const int nr, const int nc, const int nrow, const int ncol,
             row_vec[jcol] = work[mgard_common::get_index(ncol, ir, jcol)];
           }
         
-        mgard_cannon::mass_matrix_multiply(0, row_vec, coords_x);
+        mgard_canon::mass_matrix_multiply(0, row_vec, coords_x);
         
         restriction_first(row_vec, coords_x, nc, ncol);
         
@@ -2847,7 +2847,7 @@ void compute_zl_last(const int nr, const int nc, const int nrow, const int ncol,
                   }
 
                 
-                mgard_cannon::mass_matrix_multiply(0, col_vec, coords_y);
+                mgard_canon::mass_matrix_multiply(0, col_vec, coords_y);
                 
                 mgard_gen::restriction_first(col_vec, coords_y, nr, nrow);
 
@@ -3031,7 +3031,7 @@ void prep_3D(const int nr, const int nc, const int nf, const int nrow, const int
             {
               fib_vec[kfib] = work[mgard_common::get_index3(ncol,nfib,ir,jc,kfib)];
             }
-          mgard_cannon::mass_matrix_multiply(l, fib_vec, coords_z);
+          mgard_canon::mass_matrix_multiply(l, fib_vec, coords_z);
           mgard_gen::restriction_first(fib_vec, coords_z, nf, nfib);
           mgard_gen::solve_tridiag_M_l(l,  fib_vec, coords_z, nf, nfib);
           for(int kfib = 0; kfib < nfib; ++kfib)
@@ -3188,7 +3188,7 @@ void postp_3D(const int nr, const int nc, const int nf, const int nrow, const in
             {
               fib_vec[kfib] = work[mgard_common::get_index3(ncol,nfib,ir,jc,kfib)];
             }
-          mgard_cannon::mass_matrix_multiply(l, fib_vec, coords_z);
+          mgard_canon::mass_matrix_multiply(l, fib_vec, coords_z);
           mgard_gen::restriction_first(fib_vec, coords_z, nf, nfib);
           mgard_gen::solve_tridiag_M_l(l,  fib_vec, coords_z, nf, nfib);
           for(int kfib = 0; kfib < nfib; ++kfib)
@@ -3215,7 +3215,7 @@ void postp_3D(const int nr, const int nc, const int nf, const int nrow, const in
             
     //         //            mgard_gen::mass_mult_l(l, fib_vec, coords_z, nfib, nfib );
     //         //            assign_num_level(0, row_vec, 0.0, nr, nrow);
-    //         mgard_cannon::mass_matrix_multiply(l, row_vec, coords_x);
+    //         mgard_canon::mass_matrix_multiply(l, row_vec, coords_x);
     //         mgard_gen::restriction_first(row_vec, coords_x, nr, nrow );
             
     //         mgard_gen::solve_tridiag_M_l(l, row_vec, coords_x, nr, nrow );
@@ -3242,7 +3242,7 @@ void postp_3D(const int nr, const int nc, const int nf, const int nrow, const in
     //             col_vec[ir] = work[mgard_common::get_index3(ncol,nfib,ir,jc,kf)];
     //           }
     //         //            assign_num_level(0, col_vec, 0.0, nc, ncol);
-    //         mgard_cannon::mass_matrix_multiply(0, col_vec, coords_y);
+    //         mgard_canon::mass_matrix_multiply(0, col_vec, coords_y);
     //         mgard_gen::restriction_first(col_vec, coords_y, nc, ncol);
     //         mgard_gen::solve_tridiag_M_l(0,  col_vec, coords_y, nc, ncol);
     //         for(int irow = 0; irow < nr; irow += stride)
@@ -3271,7 +3271,7 @@ void postp_3D(const int nr, const int nc, const int nf, const int nrow, const in
             
     //         //            mgard_gen::mass_mult_l(l, fib_vec, coords_z, nfib, nfib );
     //         //            assign_num_level(0, fib_vec, 0.0, nf, nfib);
-    //         mgard_cannon::mass_matrix_multiply(l, fib_vec, coords_z);
+    //         mgard_canon::mass_matrix_multiply(l, fib_vec, coords_z);
     //         mgard_gen::restriction_first(fib_vec, coords_z, nf, nfib );
             
     //         mgard_gen::solve_tridiag_M_l(l, fib_vec, coords_z, nf, nfib );
@@ -3561,7 +3561,7 @@ void recompose_2D_full(const int nr, const int nc, const int nrow, const int nco
 
 void postp_2D(const int nr, const int nc, const int nrow, const int ncol,  const int l_target, double* v, std::vector<double>& work, std::vector<double>& coords_x, std::vector<double>& coords_y, std::vector<double>& row_vec, std::vector<double>& col_vec )
   {
-    mgard_cannon::copy_level(nrow,  ncol, 0,  v,  work);
+    mgard_canon::copy_level(nrow,  ncol, 0,  v,  work);
 
     assign_num_level_l(0, work.data(),  0.0,  nr,  nc,  nrow,  ncol);
 
@@ -3572,7 +3572,7 @@ void postp_2D(const int nr, const int nc, const int nrow, const int ncol,  const
             row_vec[jcol] = work[mgard_common::get_index(ncol, irow, jcol)];
           }
         
-        mgard_cannon::mass_matrix_multiply(0, row_vec, coords_x);
+        mgard_canon::mass_matrix_multiply(0, row_vec, coords_x);
         
         restriction_first(row_vec, coords_x, nc, ncol);
         
@@ -3614,7 +3614,7 @@ void postp_2D(const int nr, const int nc, const int nrow, const int ncol,  const
                   }
 
                 
-                mgard_cannon::mass_matrix_multiply(0, col_vec, coords_y);
+                mgard_canon::mass_matrix_multiply(0, col_vec, coords_y);
                 
                 mgard_gen::restriction_first(col_vec, coords_y, nr, nrow);
 
@@ -3693,7 +3693,7 @@ void postp_2D(const int nr, const int nc, const int nrow, const int ncol,  const
         //     std::cout << "last step" << "\n";
 
         assign_num_level_l(0, v, 0.0, nr, nc, nrow, ncol);
-        mgard_cannon::subtract_level(nrow,  ncol, 0, v, work.data() );
+        mgard_canon::subtract_level(nrow,  ncol, 0, v, work.data() );
   }
 
 
@@ -4918,7 +4918,7 @@ void dequantize_2D(const int nr, const int nc,  const int nrow, const int ncol, 
             row_vec[jcol] = work[mgard_common::get_index(ncol, irow, jcol)];
           }
         
-        mgard_cannon::mass_matrix_multiply(0, row_vec, coords_x);
+        mgard_canon::mass_matrix_multiply(0, row_vec, coords_x);
         
         restriction_first(row_vec, coords_x, nc, ncol);
         
@@ -4957,7 +4957,7 @@ void dequantize_2D(const int nr, const int nc,  const int nrow, const int ncol, 
                   }
 
                 
-                mgard_cannon::mass_matrix_multiply(0, col_vec, coords_y);
+                mgard_canon::mass_matrix_multiply(0, col_vec, coords_y);
                 
                 mgard_gen::restriction_first(col_vec, coords_y, nr, nrow);
 
@@ -5016,7 +5016,7 @@ void project_non_canon(const int nr, const int nc, const int nf, const int nrow,
             {
               fib_vec[kfib] = work[mgard_common::get_index3(ncol,nfib,ir,jc,kfib)];
             }
-          mgard_cannon::mass_matrix_multiply(l, fib_vec, coords_z);
+          mgard_canon::mass_matrix_multiply(l, fib_vec, coords_z);
           mgard_gen::restriction_first(fib_vec, coords_z, nf, nfib);
           mgard_gen::solve_tridiag_M_l(l,  fib_vec, coords_z, nf, nfib);
           for(int kfib = 0; kfib < nfib; ++kfib)
@@ -5214,7 +5214,7 @@ double qoi_norm(int nrow, int ncol, int nfib, std::vector<double>& coords_x, std
   	      row_vec[jcol] = work2d[mgard_common::get_index(ncol, irow, jcol)];
   	    }
 	  
-  	  mgard_cannon::solve_tridiag_M(0, row_vec, coords_x);
+  	  mgard_canon::solve_tridiag_M(0, row_vec, coords_x);
 	  //  std::cout << kfib <<" trisolve  \n"; 
   	  for(int jcol = 0; jcol < ncol; ++jcol)
   	    {
@@ -5232,7 +5232,7 @@ double qoi_norm(int nrow, int ncol, int nfib, std::vector<double>& coords_x, std
   		  col_vec[irow] = work2d[mgard_common::get_index(ncol, irow, jcol )];
   		}
 	      
-  	      mgard_cannon::solve_tridiag_M(0, col_vec, coords_y);
+  	      mgard_canon::solve_tridiag_M(0, col_vec, coords_y);
   	      for(int irow = 0;  irow < nrow; ++irow)
   		{
   		  work2d[mgard_common::get_index(ncol, irow, jcol )] = col_vec[irow] ;
@@ -5254,7 +5254,7 @@ double qoi_norm(int nrow, int ncol, int nfib, std::vector<double>& coords_x, std
             {
               fib_vec[kfib] = xi[mgard_common::get_index3(ncol,nfib,irow,jcol,kfib)];
             }
-          mgard_cannon::solve_tridiag_M(0,  fib_vec, coords_z);
+          mgard_canon::solve_tridiag_M(0,  fib_vec, coords_z);
           for(int kfib = 0; kfib < nfib; ++kfib)
             {
               xi[mgard_common::get_index3(ncol,nfib,irow,jcol,kfib)] = fib_vec[kfib] ;
@@ -5374,7 +5374,7 @@ double qoi_norm(int nrow, int ncol, int nfib, std::vector<double>& coords_x, std
   	      row_vec[jcol] = work2d[mgard_common::get_index(ncol, irow, jcol)];
   	    }
 	  
-  	  mgard_cannon::solve_tridiag_M(0, row_vec, coords_x);
+  	  mgard_canon::solve_tridiag_M(0, row_vec, coords_x);
 	  //  std::cout << kfib <<" trisolve  \n"; 
   	  for(int jcol = 0; jcol < ncol; ++jcol)
   	    {
@@ -5392,7 +5392,7 @@ double qoi_norm(int nrow, int ncol, int nfib, std::vector<double>& coords_x, std
   		  col_vec[irow] = work2d[mgard_common::get_index(ncol, irow, jcol )];
   		}
 	      
-  	      mgard_cannon::solve_tridiag_M(0, col_vec, coords_y);
+  	      mgard_canon::solve_tridiag_M(0, col_vec, coords_y);
   	      for(int irow = 0;  irow < nrow; ++irow)
   		{
   		  work2d[mgard_common::get_index(ncol, irow, jcol )] = col_vec[irow] ;
@@ -5414,7 +5414,7 @@ double qoi_norm(int nrow, int ncol, int nfib, std::vector<double>& coords_x, std
             {
               fib_vec[kfib] = xi[mgard_common::get_index3(ncol,nfib,irow,jcol,kfib)];
             }
-          mgard_cannon::solve_tridiag_M(0,  fib_vec, coords_z);
+          mgard_canon::solve_tridiag_M(0,  fib_vec, coords_z);
           for(int kfib = 0; kfib < nfib; ++kfib)
             {
               xi[mgard_common::get_index3(ncol,nfib,irow,jcol,kfib)] = fib_vec[kfib] ;
@@ -5677,7 +5677,7 @@ namespace mgard_common
 }
 
 
-namespace mgard_cannon
+namespace mgard_canon
 {
 
   void assign_num_level(const int nrow, const int ncol,    const int  l, double* v, double num)
@@ -6170,7 +6170,7 @@ namespace mgard_gen
             row_vec[jcol] = v[mgard_common::get_index(ncol, ir, jcol)];
           }
 
-        //        mgard_cannon::pi_lminus1(l, row_vec, coords_x);
+        //        mgard_canon::pi_lminus1(l, row_vec, coords_x);
         pi_lminus1_l(l, row_vec, coords_x, nc,  ncol);
         for (int jcol = 0; jcol < ncol; ++jcol)
           {
@@ -6371,7 +6371,7 @@ void restriction_first(std::vector<double>& v,  std::vector<double>& coords, int
     pi_Ql_first(nr, nc, nrow, ncol, l, v, coords_x, coords_y, row_vec, col_vec); //(I-\Pi)u this is the initial move to 2^k+1 nodes
 
 
-    mgard_cannon::copy_level(nrow,  ncol, 0,  v,  work);
+    mgard_canon::copy_level(nrow,  ncol, 0,  v,  work);
 
     assign_num_level_l(0, work.data(),  0.0,  nr,  nc,  nrow,  ncol);
 
@@ -6383,7 +6383,7 @@ void restriction_first(std::vector<double>& v,  std::vector<double>& coords, int
             row_vec[jcol] = work[mgard_common::get_index(ncol, irow, jcol)];
           }
         
-        mgard_cannon::mass_matrix_multiply(0, row_vec, coords_x);
+        mgard_canon::mass_matrix_multiply(0, row_vec, coords_x);
         
         restriction_first(row_vec, coords_x, nc, ncol);
         
@@ -6425,7 +6425,7 @@ void restriction_first(std::vector<double>& v,  std::vector<double>& coords, int
                   }
 
                 
-                mgard_cannon::mass_matrix_multiply(0, col_vec, coords_y);
+                mgard_canon::mass_matrix_multiply(0, col_vec, coords_y);
                 
                 mgard_gen::restriction_first(col_vec, coords_y, nr, nrow);
 
@@ -6748,7 +6748,7 @@ void prolongate_last(std::vector<double>& v,  std::vector<double>& coords, int n
 
 void postp_2D(const int nr, const int nc, const int nrow, const int ncol,  const int l_target, double* v, std::vector<double>& work, std::vector<double>& coords_x, std::vector<double>& coords_y, std::vector<double>& row_vec, std::vector<double>& col_vec )
   {
-    mgard_cannon::copy_level(nrow,  ncol, 0,  v,  work);
+    mgard_canon::copy_level(nrow,  ncol, 0,  v,  work);
 
     assign_num_level_l(0, work.data(),  0.0,  nr,  nc,  nrow,  ncol);
 
@@ -6760,7 +6760,7 @@ void postp_2D(const int nr, const int nc, const int nrow, const int ncol,  const
             row_vec[jcol] = work[mgard_common::get_index(ncol, irow, jcol)];
           }
         
-        mgard_cannon::mass_matrix_multiply(0, row_vec, coords_x);
+        mgard_canon::mass_matrix_multiply(0, row_vec, coords_x);
         
         restriction_first(row_vec, coords_x, nc, ncol);
         
@@ -6802,7 +6802,7 @@ void postp_2D(const int nr, const int nc, const int nrow, const int ncol,  const
                   }
 
                 
-                mgard_cannon::mass_matrix_multiply(0, col_vec, coords_y);
+                mgard_canon::mass_matrix_multiply(0, col_vec, coords_y);
                 
                 mgard_gen::restriction_first(col_vec, coords_y, nr, nrow);
 
@@ -6881,7 +6881,7 @@ void postp_2D(const int nr, const int nc, const int nrow, const int ncol,  const
 
 
         assign_num_level_l(0, v, 0.0, nr, nc, nrow, ncol);
-        mgard_cannon::subtract_level(nrow,  ncol, 0, v, work.data() );
+        mgard_canon::subtract_level(nrow,  ncol, 0, v, work.data() );
 
   }
 

@@ -84,7 +84,7 @@ namespace mgard_common
 }
 
 
-namespace mgard_cannon
+namespace mgard_canon
 {
 
   void assign_num_level(const int nrow, const int ncol,    const int  l, double* v, double num);
@@ -280,7 +280,7 @@ namespace mgard_2d
 }
 
 
-namespace mgard_cannon
+namespace mgard_canon
 {
 
   void assign_num_level(const int nrow, const int ncol,    const int  l, double* v, double num);
