@@ -599,7 +599,7 @@ refactor_qz_2D (int nrow, int ncol, const double *u, int &outsize, double tol)
       tol /= nlevel + 1;
 
       int l_target = nlevel-1;
-      l_target = 0;
+      //      l_target = 0;
       mgard_2d::mgard_gen::prep_2D(nr, nc, nrow, ncol, l_target, v.data(),  work, coords_x, coords_y, row_vec, col_vec);
 
       mgard_2d::mgard_gen::refactor_2D(nr, nc, nrow, ncol, l_target, v.data(),  work, coords_x, coords_y, row_vec, col_vec);
@@ -645,7 +645,7 @@ refactor_qz_2D (int nrow, int ncol, std::vector<double>& coords_x, std::vector<d
   tol /= nlevel + 1;
   
   int l_target = nlevel-1;
-  l_target = 0;
+  //  l_target = 0;
   mgard_2d::mgard_gen::prep_2D(nr, nc, nrow, ncol, l_target, v.data(),  work, coords_x, coords_y, row_vec, col_vec);
   
   mgard_2d::mgard_gen::refactor_2D(nr, nc, nrow, ncol, l_target, v.data(),  work, coords_x, coords_y, row_vec, col_vec);
@@ -737,7 +737,7 @@ refactor_qz_2D (int nrow, int ncol, const double *u, int &outsize, double tol, d
       tol /= nlevel + 1;
 
       int l_target = nlevel-1;
-      l_target = 0;
+      //      l_target = 0;
       mgard_2d::mgard_gen::prep_2D(nr, nc, nrow, ncol, l_target, v.data(),  work, coords_x, coords_y, row_vec, col_vec);
 
       mgard_2d::mgard_gen::refactor_2D(nr, nc, nrow, ncol, l_target, v.data(),  work, coords_x, coords_y, row_vec, col_vec);
@@ -784,7 +784,7 @@ refactor_qz_2D (int nrow, int ncol, std::vector<double>& coords_x, std::vector<d
   tol /= nlevel + 1;
 
   int l_target = nlevel-1;
-  l_target = 0;
+  //  l_target = 0;
   mgard_2d::mgard_gen::prep_2D(nr, nc, nrow, ncol, l_target, v.data(),  work, coords_x, coords_y, row_vec, col_vec);
 
   mgard_2d::mgard_gen::refactor_2D(nr, nc, nrow, ncol, l_target, v.data(),  work, coords_x, coords_y, row_vec, col_vec);
@@ -857,9 +857,9 @@ refactor_qz_2D (int nrow, int ncol, std::vector<double>& coords_x, std::vector<d
 
       int nlevel = std::min(nlevel_x, nlevel_y);
 
-      //      int l_target = nlevel-1;
+      int l_target = nlevel-1;
 
-      int l_target = 0;
+      //      int l_target = 0;
       std::vector<int> out_data(nrow*ncol + size_ratio);
 
 
@@ -898,9 +898,9 @@ refactor_qz_2D (int nrow, int ncol, std::vector<double>& coords_x, std::vector<d
 
   int nlevel = std::min(nlevel_x, nlevel_y);
 
-  //      int l_target = nlevel-1;
+  int l_target = nlevel-1;
 
-  int l_target = 0;
+  //  int l_target = 0;
   std::vector<int> out_data(nrow*ncol + size_ratio);
 
 
@@ -979,9 +979,9 @@ double* recompose_udq_2D(int nrow, int ncol, unsigned char *data, int data_len, 
 
       int nlevel = std::min(nlevel_x, nlevel_y);
 
-      //      int l_target = nlevel-1;
+      int l_target = nlevel-1;
 
-      int l_target = 0;
+      //    int l_target = 0;
       std::vector<int> out_data(nrow*ncol + size_ratio);
 
        mgard::decompress_memory_z(data, data_len, out_data.data(), out_data.size()*sizeof(int));
@@ -1018,9 +1018,9 @@ double* recompose_udq_2D(int nrow, int ncol, std::vector<double>& coords_x,  std
 
   int nlevel = std::min(nlevel_x, nlevel_y);
 
-  //      int l_target = nlevel-1;
+  int l_target = nlevel-1;
 
-  int l_target = 0;
+  //  int l_target = 0;
   std::vector<int> out_data(nrow*ncol + size_ratio);
 
   mgard::decompress_memory_z(data, data_len, out_data.data(), out_data.size()*sizeof(int));
